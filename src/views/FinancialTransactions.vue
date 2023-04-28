@@ -1,0 +1,36 @@
+<template>
+    <div class="mb-36" v-for="transaction in transactions">
+      <MT  :mablagh="transaction.amount" :tozihat="transaction.description" :tarikh="transaction.at_date" :dastebandiha="transaction.category.name" />
+    </div>
+  </template>
+  <script >
+  import MT from '../components/MT.vue'
+  export default {
+    data(){
+        return{
+           transactions: {}
+        };
+    },
+   components:{
+      MT,
+     },  
+   methods:{
+    getMT(){
+      fetch('http://193.70.91.1:3000/api/v1/wallet/2/wallet_transaction')
+        .then(responseMT=>responseMT.text())
+        .then(responseMT=> JSON.parse(responseMT))
+        .then(responseMT=>{
+            this.transactions = responseMT.data
+        });
+     },
+   },
+   created(){
+        this.getMT()
+    },
+  };
+  </script>
+  
+  <style>
+  
+  
+  </style>

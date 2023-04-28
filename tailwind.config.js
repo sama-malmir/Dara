@@ -9,11 +9,16 @@ module.exports = {
       colors:{
         'main-color':'#234E70',
         'secondary-color':'#FBF8BE',
-        
-
-        
-        
       },
+      height: {
+        '500': '500px',
+      },
+      width: {
+        '215': '215px',
+      },
+      spacing: {
+        '435': '435px',
+      }
     },
   },
   plugins: [],

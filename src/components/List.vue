@@ -1,25 +1,32 @@
 <template>
     <div>
-        <ul class=" pt-10 gap-2">
-            <li class="listStyle  ">
-                تراکنش جدید
-            </li>
-            <li class="listStyle">
+        <div class=" pt-10 gap-2">
+           <RouterLink to="/financial-transactions" >
+                <div class="listStyle">
+                    تراکنش‌های مالی
+                </div>
+            </RouterLink>
+            <RouterLink to="/new-transaction" >
+                <div class="listStyle">
+                    تراکنش جدید
+                </div>
+            </RouterLink>
+            <div class="listStyle">
+                لیست تراکنش‌ها 
+            </div>
+            <div class="listStyle">
                 لیست تراکنش ها 
-            </li>
-            <li class="listStyle">
+            </div>
+            <div class="listStyle">
                 لیست تراکنش ها 
-            </li>
-            <li class="listStyle">
+            </div>
+            <div class="listStyle">
                 لیست تراکنش ها 
-            </li>
-            <li class="listStyle">
+            </div>
+            <div class="listStyle">
                 لیست تراکنش ها 
-            </li>
-            <li class="listStyle">
-                لیست تراکنش ها 
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
 </template>
 <script>
