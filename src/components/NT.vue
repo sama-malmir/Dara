@@ -2,28 +2,73 @@
     <div class="flex justify-center">
         <div class="style">
             <div class="inline-flex items-center">
-                <label>دسته‌بندی</label>
+                <label class="ml-6">دسته‌بندی</label>
+                    <select v-model="dastebandi" name="category" class="my-3 px-3 w-52 h-8 rounded-xl text-black">
+                        <option class="text-black" v-for="category in categoris" :value="category.id" :key="category.id">{{ category.name }}</option>
+                    </select>
             </div>
 
             <div class="inline-flex items-center">
                 <label>مبلغ</label>
-                <input  class="mr-14 border my-3 py-3 px-4 rounded-xl h-8 text-slate-950" type="number">
+                <input v-model="mablagh" class="mr-14 border my-3 py-3 px-4 rounded-xl h-8 text-slate-950" type="number">
             </div>
-            <div class="inline-flex items-start  ">
+            <div class="inline-flex items-start">
                 <label class="mt-3">توضیحات</label>
-                <input class="mr-6 border my-3 py-3 px-4 rounded-xl h-52 text-slate-950" type="text">
+                <input v-model="tozihat" class="mr-6 border my-3 py-3 px-4 rounded-xl h-52 text-slate-950" type="text">
             </div>
+            <div class="inline-flex justify-end">
+                <button class="h-9 border w-16 rounded-xl  bg-secondary-color text-main-color font-bold mt-10" @click="newTransaction()">ثبت</button>
             </div>
-            
-    </div>
+        </div>
+        </div>
+            <div v-if="isSuccess" class="text-secondary-color font-bold text-2xl mt-11 mr-96">
+                عملیات با موفقیت انجام شد
+            </div>
 </template>
 <script>
 export default {
     data() {
         return {
+            categoris:[],
+            mablagh:'',
+            tozihat:'',
+            dastebandi:'',
+            isSuccess :false,
+            error:false,
+
         }
     },
-}
+    methods:{
+        getCategory(){
+            fetch('http://193.70.91.1:3000/api/v1/category')
+            .then(response => response.text())
+            .then(response => JSON.parse(response))
+            .then(response => {
+            this.categoris=response.data
+            
+        }
+        )},
+        newTransaction(){
+            const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({amount:this.mablagh,description:this.tozihat,category_id:this.dastebandi})
+            };
+           fetch ('http://193.70.91.1:3000/api/v1/wallet/2/wallet_transaction',requestOptions)
+           .then(response =>{
+            if ( response.status === 204 ){
+                this.isSuccess=true;
+            
+            }
+           }
+           )},
+        },
+        
+        created(){
+            this.getCategory()
+            }
+        }
+    
 </script>
 <style scoped>
 .style {
