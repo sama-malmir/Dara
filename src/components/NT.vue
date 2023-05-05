@@ -4,8 +4,8 @@
             <div class="inline-flex items-center">
                 <label class="ml-6">دسته‌بندی</label>
                 <select v-model="dastebandi" name="category" class="my-3 px-3 w-52 h-8 rounded-xl text-black">
-                    <option class="text-black" v-for="category in categoris" :value="category.id" :key="category.id">{{
-                        category.name }}</option>
+                    <option class="text-black" v-for="category in categoris" :value="category.id" :key="category.id">
+                        {{ category.name }}</option>
                 </select>
             </div>
             <div class="inline-flex items-center">
@@ -15,18 +15,20 @@
                     <option value="withdraw">برداشت</option>
                 </select>
             </div>
-
             <div class="inline-flex items-center">
                 <label>مبلغ</label>
-                <input v-model="mablagh" class="mr-14 border my-3 py-3 px-4 rounded-xl h-8 text-slate-950" type="number">
+                <div class="flex flex-col">
+                    <input type="number" dir="ltr" v-model="mablagh"
+                        class="mr-14 border my-3 py-3 px-4 rounded-xl h-8 text-slate-950">
+                    <div class="ml-4" dir="ltr" v-if="mablagh > 0">{{ mablagh.toLocaleString() }}</div>
+                </div>
             </div>
             <div class="inline-flex items-start">
                 <label class="mt-3">توضیحات</label>
                 <input v-model="tozihat" class="mr-6 border my-3 py-3 px-4 rounded-xl h-52 text-slate-950" type="text">
             </div>
             <div class="inline-flex justify-end">
-                <button class="h-9 border w-16 rounded-xl  bg-secondary-color text-main-color font-bold mt-2"
-                    @click="newTransaction()">ثبت</button>
+                <button class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold -mt-7" @click="newTransaction()">ثبت</button>
             </div>
         </div>
     </div>
@@ -54,12 +56,11 @@ export default {
                 .then(response => JSON.parse(response))
                 .then(response => {
                     this.categoris = response.data
-
                 }
                 )
         },
         newTransaction() {
-            if(this.transactionType === 'withdraw'){
+            if (this.transactionType === 'withdraw') {
                 this.mablagh = -this.mablagh
             }
             const requestOptions = {
@@ -71,21 +72,9 @@ export default {
                 .then(response => {
                     if (response.status === 204) {
                         this.isSuccess = true;
-
                     }
                 })
         },
-        withdrawAndDeposit() {
-            if (this.amount >= 1) {
-                this.accountDetails = this.deposit
-            } else {
-                if (this.amount <= 0) {
-                    this.accountDetails = this.withdraw
-
-                }
-            }
-
-        }
     },
 
     created() {

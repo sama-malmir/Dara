@@ -1,13 +1,14 @@
 <template>
     <div class="flex justify-center">
-        <div class="style w-3/4">
+        <div class="style w-3/4"  :class="[ mablagh > 0 ? 'bg-green-500'  : 'bg-red-500' ]" >
             <div class="inline-flex items-center flex-col">
                 <label>دسته‌بندی</label>
                 <div class="stylelists w-32"> {{ dastebandiha }} </div>
             </div>
             <div class="inline-flex items-center flex-col">
                 <label>نوع تراکنش</label>
-                <div class="stylelists w-24" type="text" > </div>
+                <div class="stylelists w-24" type="text" v-if="mablagh < 0" >برداشت</div>
+                <div class="stylelists w-24" type="text" v-if="mablagh > 0" >واریز</div>
             </div>
             <div class="inline-flex items-center flex-col">
                 <label>تاریخ</label>
@@ -42,6 +43,8 @@ props:{
     
 },
 methods:{
+   
+    
     deleteTransaction(){
 
 
@@ -51,7 +54,7 @@ methods:{
 </script>
 <style scoped>
 .style{
-    @apply bg-main-color mr-52 h-32 border rounded-xl -mt-435 px-1 pt-4 text-secondary-color flex flex-row
+    @apply  mr-52 h-32 border rounded-xl -mt-435 px-1 pt-4 text-secondary-color flex flex-row
 }
 .stylelists{
     @apply flex items-center mr-14 border my-3 py-3 px-4 rounded-xl h-8 bg-white text-main-color
