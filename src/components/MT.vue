@@ -3,23 +3,26 @@
         <div class="style w-3/4">
             <div class="inline-flex items-center flex-col">
                 <label>دسته‌بندی</label>
-                <div  class="flex items-center mr-14 border my-3 py-3 px-4 rounded-xl h-8 bg-white text-main-color w-40" > {{ dastebandiha }} </div>
+                <div class="stylelists w-32"> {{ dastebandiha }} </div>
+            </div>
+            <div class="inline-flex items-center flex-col">
+                <label>نوع تراکنش</label>
+                <div class="stylelists w-24" type="text" > </div>
             </div>
             <div class="inline-flex items-center flex-col">
                 <label>تاریخ</label>
-                <div  class=" flex items-center mr-14 border my-3 py-3 px-4 rounded-xl h-8 bg-white text-main-color w-48"> {{ tarikh }} </div>
+                <div class="stylelists w-40"> {{ tarikh }} </div>
             </div>
-            <div class="inline-flex items-center flex-col">
+            <div class="inline-flex items-center flex-col ">
                 <label>مبلغ</label>
-                <div  class="flex items-center mr-14 border my-3 py-3 px-4 rounded-xl h-8 bg-white text-main-color w-48"> {{ mablagh }} </div>
+                <div class="stylelists w-36"> {{ mablagh.toLocaleString() }} </div>
             </div>
             <div class="inline-flex items-center flex-col">
-                <label >توضیحات</label>
-                <div class="flex items-center mr-14 border my-3 py-3 px-4 rounded-xl h-8 bg-white text-main-color w-48"> {{ tozihat }}</div>
+                <label>توضیحات</label>
+                <div class="stylelists w-40"> {{ tozihat }}</div>
             </div>  
-            <div class=" flex items-center mr-8">
-                <button class="h-8 border w-16 rounded-xl  bg-secondary-color text-main-color font-bold mt-10" @click="deleteTransaction()">حذف</button>
-
+            <div class="flex items-center mr-8">
+                <button class="h-8 border w-16 rounded-xl bg-secondary-color text-main-color font-bold mt-10" @click="deleteTransaction()">حذف</button>
             </div>
         </div>
     </div>
@@ -28,7 +31,7 @@
 export default{
     data() {
     return {
-        
+        transactionType:null 
     }
 },
 props:{
@@ -36,21 +39,21 @@ props:{
     mablagh:String,
     tozihat:String,
     tarikh:String,
+    
 },
 methods:{
     deleteTransaction(){
 
-        
+
     }
 }
 }
 </script>
 <style scoped>
 .style{
-    @apply  bg-main-color mr-52 h-32   border rounded-xl -mt-435 px-1 pt-4 text-secondary-color flex flex-row
+    @apply bg-main-color mr-52 h-32 border rounded-xl -mt-435 px-1 pt-4 text-secondary-color flex flex-row
 }
 .stylelists{
-    @apply border my-3 py-3 px-4 rounded-full  inline-flex justify-around
+    @apply flex items-center mr-14 border my-3 py-3 px-4 rounded-xl h-8 bg-white text-main-color
 }
-
 </style>

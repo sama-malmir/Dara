@@ -3,7 +3,7 @@
         <div class="bg-secondary-color h-24 -mx-28"></div>
         <div class="Account"> 
             <p class="text-main-color"> کیف پول {{ name }} </p>
-            <p class="text-main-color"> {{ wallet }} تومان </p>
+            <p class="text-main-color">  {{ wallet.toLocaleString() }} تومان </p>
         </div>
     </div>
 </template>
@@ -20,6 +20,12 @@ export default{
  props:{
    name:String,
    wallet:String
+},
+methods:{
+    formatNumber(){
+        
+    
+    }
 }
 }
 </script>
