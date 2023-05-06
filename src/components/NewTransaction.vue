@@ -25,7 +25,7 @@
             </div>
             <div class="inline-flex items-start">
                 <label class="mt-3">توضیحات</label>
-                <input v-model="tozihat" class="mr-6 border my-3 py-3 px-4 rounded-xl h-52 text-slate-950" type="text">
+                <textarea v-model="tozihat" class="mr-6 border my-3 py-3 px-4 rounded-xl h-52 text-slate-950" type="text"  cols="23" rows="5"></textarea>
             </div>
             <div class="inline-flex justify-end">
                 <button class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold -mt-7" @click="newTransaction()">ثبت</button>
