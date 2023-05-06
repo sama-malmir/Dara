@@ -1,10 +1,10 @@
 <template>
     <div class="mb-36" v-for="transaction in transactions">
-      <MT  :mablagh="transaction.amount" :tozihat="transaction.description" :tarikh="transaction.at_date" :dastebandiha="transaction.category.name" />
+      <FinancialTransaction  :mablagh="transaction.amount" :tozihat="transaction.description" :tarikh="transaction.at_date" :dastebandiha="transaction.category.name" />
     </div>
   </template>
   <script >
-  import MT from '../components/MT.vue'
+  import FinancialTransaction from '../components/FinancialTransaction.vue'
   export default {
     data(){
         return{
@@ -12,7 +12,7 @@
         };
     },
    components:{
-      MT,
+    FinancialTransaction,
      },  
    methods:{
     getMT(){

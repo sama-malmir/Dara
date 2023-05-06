@@ -1,13 +1,13 @@
 <template>
     <div>
-      <NT />
+      <NewTransaction />
     </div>
   </template>
   <script>
-  import NT from '../components/NT.vue'
+  import NewTransaction from '../components/NewTransaction.vue'
   export default {
    components:{
-      NT,
+    NewTransaction,
    },   
   }
   </script>
