@@ -2,30 +2,30 @@
     <div class="flex justify-center">
         <div class="style">
             <div class="inline-flex items-center">
-                <label class="ml-6">دسته‌بندی</label>
-                <select v-model="dastebandi" name="category" class="my-3 px-3 w-52 h-8 rounded-xl text-black">
+                <label class="ml-6">دسته‌بندی <span class="text-red-600 text-2xl">*</span></label>
+                <select v-model="dastebandi" name="category" class="-mr-1 my-3 px-3 w-56 h-8 rounded-xl text-black">
                     <option class="text-black" v-for="category in categoris" :value="category.id" :key="category.id">
                         {{ category.name }}</option>
                 </select>
             </div>
             <div class="inline-flex items-center">
-                <label>نوع تراکنش</label>
-                <select v-model="transactionType" class="mr-3 my-3 px-4 rounded-xl h-8 w-52 text-black">
+                <label>نوع تراکنش <span class="text-red-600 text-2xl">*</span></label>
+                <select v-model="transactionType" class="mr-3 my-3 px-4 rounded-xl h-8 w-56 text-black">
                     <option value="depoist">واریز</option>
                     <option value="withdraw">برداشت</option>
                 </select>
             </div>
             <div class="inline-flex items-center">
-                <label>مبلغ</label>
+                <label>مبلغ <span class="text-red-600 text-2xl">*</span></label>
                 <div class="flex flex-col">
                     <input type="number" dir="ltr" v-model="mablagh"
-                        class="mr-14 border my-3 py-3 px-4 rounded-xl h-8 text-slate-950">
+                        class="mr-14 border my-3 py-3 px-4 rounded-xl h-8 text-slate-950 w-56">
                     <div class="ml-4" dir="ltr" v-if="mablagh > 0">{{ mablagh.toLocaleString() }}</div>
                 </div>
             </div>
             <div class="inline-flex items-start">
                 <label class="mt-3">توضیحات</label>
-                <textarea v-model="tozihat" class="mr-6 border my-3 py-3 px-4 rounded-xl h-52 text-slate-950" type="text"
+                <textarea v-model="tozihat" class="mr-9 border my-3 py-3 px-4 rounded-xl h-52 text-slate-950 w-56" type="text"
                     cols="23" rows="5"></textarea>
             </div>
             <div class="inline-flex justify-end">
