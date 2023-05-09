@@ -34,12 +34,13 @@
             </div>
         </div>
     </div>
-    <div v-if="isSuccess" class="text-secondary-color font-bold text-2xl mt-11 mr-96">
+    <div v-if="isSuccess" class="text-secondary-color font-bold text-2xl mt-11  text-center">
         عملیات با موفقیت انجام شد
     </div>
-    <div v-if="isErrors" class="text-secondary-color font-bold text-2xl mt-11 mr-96">
-      {{ errors }}
-    </div>
+   
+        <div v-if="isErrors" v-for="error in errors"   class="text-secondary-color font-bold text-2xl mt-11 text-center">
+            {{ error }}
+        </div>
 </template>
 <script>
 export default {
@@ -51,8 +52,8 @@ export default {
             dastebandi: null,
             isSuccess: false,
             isErrors: false,
-            transactionType: 'withdraw',
-            errors:[]
+            errors:[],
+            transactionType: 'withdraw'
         }
     },
     methods: {
