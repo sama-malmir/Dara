@@ -25,8 +25,8 @@
             </div>
             <div class="inline-flex items-start">
                 <label class="mt-3">توضیحات</label>
-                <textarea v-model="tozihat" class="mr-9 border my-3 py-3 px-4 rounded-xl h-52 text-slate-950 w-56" type="text"
-                    cols="23" rows="5"></textarea>
+                <textarea v-model="tozihat" class="mr-9 border my-3 py-3 px-4 rounded-xl h-52 text-slate-950 w-56"
+                    type="text" cols="23" rows="5"></textarea>
             </div>
             <div class="inline-flex justify-end">
                 <button class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold -mt-7"
@@ -37,10 +37,9 @@
     <div v-if="isSuccess" class="text-secondary-color font-bold text-2xl mt-11  text-center">
         عملیات با موفقیت انجام شد
     </div>
-   
-        <div v-if="isErrors" v-for="error in errors"   class="text-secondary-color font-bold text-2xl mt-11 text-center">
-            {{ error }}
-        </div>
+    <div v-if="isErrors" v-for="error in errors" class="text-secondary-color font-bold text-f20 mt-11 text-end ml-435">
+        {{ error }}
+    </div>
 </template>
 <script>
 export default {
@@ -52,7 +51,7 @@ export default {
             dastebandi: null,
             isSuccess: false,
             isErrors: false,
-            errors:[],
+            errors: [],
             transactionType: 'withdraw'
         }
     },
@@ -66,8 +65,8 @@ export default {
                 )
         },
         newTransaction() {
-            if (this.transactionType === 'withdraw') {
-                this.mablagh = -this.mablagh
+            if (this.transactionType === 'withdraw' && this.mablagh != null) {
+                this.mablagh = -this.mablagh 
             }
             const requestOptions = {
                 method: "POST",
@@ -78,13 +77,13 @@ export default {
                 .then(response => {
                     if (response.status === 204) {
                         this.isSuccess = true;
-                    } 
-                    if (response.status === 422){
+                    }
+                    if (response.status === 422) {
                         response.json()
-                        .then(khata=>{
-                            this.isErrors=true
-                            this.errors=khata.errors 
-                        })
+                            .then(khata => {
+                                this.isErrors = true
+                                this.errors = khata.errors
+                            })
                     }
                 })
         },
@@ -103,4 +102,5 @@ export default {
 
 .stylelists {
     @apply border my-3 py-3 px-4 rounded-full inline-flex justify-between
-}</style>
+}
+</style>
