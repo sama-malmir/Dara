@@ -3,13 +3,14 @@
         <div class="style">
             <div class="inline-flex items-center">
                 <label class="ml-6">دسته‌بندی <span class="text-red-600 text-2xl">*</span></label>
-                <select @change="isWrongCategory = false"  v-model="dastebandi" name="category" class="-mr-1 my-3 px-3 w-56 h-8 rounded-xl text-black"
-                :class="[isWrongAmount == true ? 'border-red-600 border-2' : 'border-gray-600']">
+                <select @change="isWrongCategory = false" v-model="dastebandi" name="category"
+                    class="-mr-1 my-3 px-3 w-56 h-8 rounded-xl text-black"
+                    :class="[isWrongAmount == true ? 'border-red-600 border-2' : 'border-gray-600']">
                     <option class="text-black" v-for="category in categoris" :value="category.id" :key="category.id">
                         {{ category.name }}</option>
                 </select>
                 <p v-if="isWrongCategory">
-                <b class="text-red-600 text-lg mr-5">لطفا دسته‌بندی را وارد کنید</b>
+                    <b class="text-red-600 text-lg mr-5">لطفا دسته‌بندی را وارد کنید</b>
                 </p>
             </div>
             <div class="inline-flex items-center">
@@ -28,7 +29,7 @@
                     <div class="ml-4" dir="ltr" v-if="mablagh > 0">{{ mablagh.toLocaleString() }}</div>
                 </div>
                 <p v-if="isWrongAmount">
-                <b class="text-red-600 text-lg mr-5">لطفا مبلغ را وارد کنید</b>
+                    <b class="text-red-600 text-lg mr-5">لطفا مبلغ را وارد کنید</b>
                 </p>
             </div>
             <div class="inline-flex items-start">
@@ -62,18 +63,11 @@ export default {
             errors: [],
             transactionType: 'withdraw',
             isWrongAmount: false,
-            isWrongCategory:false
+            isWrongCategory: false
 
         }
     },
     methods: {
-        checkForm(){
-            this.errors=[];
-            if(this.mablagh=== null){
-               
-            }
-        },
-
         getCategory() {
             fetch('http://193.70.91.1:3000/api/v1/category')
                 .then(response => response.json())
@@ -83,34 +77,35 @@ export default {
                 )
         },
         newTransaction() {
-            if(this.mablagh == null || this.mablagh <= 0 ){
+            if (this.mablagh == null || this.mablagh <= 0) {
                 this.isWrongAmount = true
             }
-            if(this.dastebandi == null ){
-                this.isWrongCategory =true 
+            if (this.dastebandi == null) {
+                this.isWrongCategory = true
             }
-            if(this.isWrongAmount === true || this.isWrongCategory === true ){
+            if (this.isWrongAmount === true || this.isWrongCategory === true) {
                 return
             }
             if (this.transactionType === 'withdraw' && this.mablagh != null) {
-                this.mablagh = -this.mablagh 
+                this.mablagh = -this.mablagh
             }
             const requestOptions = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ amount: this.mablagh, description: this.tozihat, category_id: this.dastebandi })
-             };
+            };
             fetch('http://193.70.91.1:3000/api/v1/wallet/2/wallet_transaction', requestOptions)
                 .then(response => {
                     if (response.status === 204) {
                         this.isSuccess = true;
+                        this.$emit('updateWallet')
                     }
                     if (response.status === 422) {
                         response.json()
                             .then(khata => {
                                 this.isErrors = true
                                 this.errors = khata.errors
-                             })
+                            })
                     }
                 })
         },
@@ -120,7 +115,6 @@ export default {
         this.getCategory()
     }
 }
-
 </script>
 <style scoped>
 .style {

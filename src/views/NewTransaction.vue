@@ -1,18 +1,20 @@
 <template>
-    <div>
-      <NewTransaction />
-    </div>
-  </template>
-  <script>
-  import NewTransaction from '../components/NewTransaction.vue'
-  export default {
-   components:{
+  <div>
+    <NewTransaction @update-wallet="doClick()" />
+  </div>
+</template>
+<script>
+import NewTransaction from '../components/NewTransaction.vue'
+export default {
+  methods: {
+    doClick() {
+      this.$emit('updateWallet')
+    }
+  },
+  components: {
     NewTransaction,
-   },   
-  }
-  </script>
+  },
+}
+</script>
   
-  <style>
-  
-  
-  </style>
+<style></style>
