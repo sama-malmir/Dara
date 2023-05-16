@@ -3,7 +3,7 @@
         <div class="style">
             <div class="inline-flex items-center">
                 <label class="ml-6">دسته‌بندی <span class="text-red-600 text-2xl">*</span></label>
-                <select @change="isWrongCategory = false" v-model="dastebandi" name="category"
+                <select @change="isWrongCategory = false; isSuccess = false" v-model="dastebandi" name="category"
                     class="-mr-1 my-3 px-3 w-56 h-8 rounded-xl text-black"
                     :class="[isWrongAmount == true ? 'border-red-600 border-2' : 'border-gray-600']">
                     <option class="text-black" v-for="category in categoris" :value="category.id" :key="category.id">
@@ -23,7 +23,7 @@
             <div class="inline-flex items-center">
                 <label>مبلغ <span class="text-red-600 text-2xl">*</span></label>
                 <div class="flex flex-col">
-                    <input @change="isWrongAmount = false" type="number" dir="ltr" v-model="mablagh"
+                    <input @change="isWrongAmount = false; isSuccess = false"  type="number" dir="ltr" v-model="mablagh"
                         :class="[isWrongAmount == true ? 'border-red-600 border-2' : 'border-gray-600']"
                         class="mr-14 border my-3 py-3 px-4 rounded-xl h-8 text-slate-950 w-56">
                     <div class="ml-4" dir="ltr" v-if="mablagh > 0">{{ mablagh.toLocaleString() }}</div>
@@ -34,7 +34,7 @@
             </div>
             <div class="inline-flex items-start">
                 <label class="mt-3">توضیحات</label>
-                <textarea v-model="tozihat" class="mr-9 border my-3 py-3 px-4 rounded-xl h-52 text-slate-950 w-56"
+                <textarea v-model="tozihat" @change="isSuccess = false" class="mr-9 border my-3 py-3 px-4 rounded-xl h-52 text-slate-950 w-56"
                     type="text" cols="23" rows="5"></textarea>
             </div>
             <div class="inline-flex justify-end">
