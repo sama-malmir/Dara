@@ -99,6 +99,8 @@ export default {
                     if (response.status === 204) {
                         this.isSuccess = true;
                         this.$emit('updateWallet')
+                        this.clearpage()
+
                     }
                     if (response.status === 422) {
                         response.json()
@@ -108,6 +110,11 @@ export default {
                             })
                     }
                 })
+        },
+        clearpage() {
+            this.mablagh = null
+            this.tozihat = null
+            this.dastebandi = null
         },
     },
 

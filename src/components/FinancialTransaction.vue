@@ -32,9 +32,7 @@
 <script>
 export default {
     data() {
-        return {
-
-        }
+        
     },
     props: {
         dastebandiha: Object,
@@ -44,11 +42,9 @@ export default {
 
     },
     methods: {
-
-
+       
     },
-
-
+    
 }
 
 </script>
