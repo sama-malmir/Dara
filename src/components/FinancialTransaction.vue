@@ -24,7 +24,7 @@
             </div>
             <div class="flex items-center mr-8">
                 <button class="h-8 border w-16 rounded-xl bg-secondary-color text-main-color font-bold mt-10"
-                    @click="deleteTransaction()">حذف</button>
+                    @click="deleteTransaction(id)">حذف</button>
             </div>
         </div>
     </div>
@@ -32,19 +32,38 @@
 <script>
 export default {
     data() {
-        
+        return {
+            Success: false,
+            Errors: false
+        }
     },
     props: {
         dastebandiha: Object,
         mablagh: String,
         tozihat: String,
         tarikh: String,
+        id: Number,
+
 
     },
     methods: {
-       
+        deleteTransaction(transactionId) {
+            const requestOptions = {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+            };
+            fetch('http://193.70.91.1:3000/api/v1/wallet_transaction/' + transactionId, requestOptions)
+                .then(response => {
+                    if (response.status === 204) {
+                        this.Success = true;
+                        this.$emit('updateWallet')
+                        
+                    }
+                })
+        }
     },
-    
+
+
 }
 
 </script>

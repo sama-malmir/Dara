@@ -23,7 +23,7 @@
             <div class="inline-flex items-center">
                 <label>مبلغ <span class="text-red-600 text-2xl">*</span></label>
                 <div class="flex flex-col">
-                    <input @change="isWrongAmount = false; isSuccess = false"  type="number" dir="ltr" v-model="mablagh"
+                    <input @change="isWrongAmount = false; isSuccess = false" type="number" dir="ltr" v-model="mablagh"
                         :class="[isWrongAmount == true ? 'border-red-600 border-2' : 'border-gray-600']"
                         class="mr-14 border my-3 py-3 px-4 rounded-xl h-8 text-slate-950 w-56">
                     <div class="ml-4" dir="ltr" v-if="mablagh > 0">{{ mablagh.toLocaleString() }}</div>
@@ -34,8 +34,9 @@
             </div>
             <div class="inline-flex items-start">
                 <label class="mt-3">توضیحات</label>
-                <textarea v-model="tozihat" @change="isSuccess = false" class="mr-9 border my-3 py-3 px-4 rounded-xl h-52 text-slate-950 w-56"
-                    type="text" cols="23" rows="5"></textarea>
+                <textarea v-model="tozihat" @change="isSuccess = false"
+                    class="mr-9 border my-3 py-3 px-4 rounded-xl h-52 text-slate-950 w-56" type="text" cols="23"
+                    rows="5"></textarea>
             </div>
             <div class="inline-flex justify-end">
                 <button class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold -mt-7"

@@ -1,6 +1,6 @@
 <template>
     <div class="mb-36" v-for="transaction in transactions">
-      <FinancialTransaction  :mablagh="transaction.amount" :tozihat="transaction.description" :tarikh="transaction.at_date" :dastebandiha="transaction.category.name" />
+      <FinancialTransaction  @update-wallet="doClick()" :id="transaction.id"  :mablagh="transaction.amount" :tozihat="transaction.description" :tarikh="transaction.at_date" :dastebandiha="transaction.category.name" />
     </div>
   </template>
   <script >
@@ -22,6 +22,10 @@
             this.transactions = responseMT.data
         });
      },
+     doClick() {
+      this.getMT()
+      this.$emit('updateWallet')
+    }
    },
    created(){
         this.getMT()
