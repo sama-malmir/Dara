@@ -26,6 +26,11 @@
                 <button class="h-8 border w-16 rounded-xl bg-secondary-color text-main-color font-bold mt-10"
                     @click="deleteTransaction(id)">حذف</button>
             </div>
+            <div class="inline-flex items-start flex-col">
+                <div v-if="Errors" class="text-red-400 font-bold text-2xl  text-center">
+                    عملیات با خطا روبرو شد
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -33,8 +38,7 @@
 export default {
     data() {
         return {
-            Success: false,
-            Errors: false
+            
         }
     },
     props: {
@@ -55,12 +59,15 @@ export default {
             fetch('http://193.70.91.1:3000/api/v1/wallet_transaction/' + transactionId, requestOptions)
                 .then(response => {
                     if (response.status === 204) {
-                        this.Success = true;
                         this.$emit('updateWallet')
-                        
+                        this.$emit('delete')
+
                     }
                 })
-        }
+        },
+       doClick(){
+
+       }
     },
 
 

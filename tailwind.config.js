@@ -18,6 +18,7 @@ module.exports = {
       },
       spacing: {
         '435': '435px',
+        '478':'478px',
       },
       fontSize: {
         f20: ['20px', '10px'],

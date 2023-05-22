@@ -1,14 +1,20 @@
 <template>
+  <div class="relative">
+   <div v-if="isSuccess" class="text-green-400 font-bold text-2xl text-center absolute left-36 -top-478">
+                    عملیات با موفقیت انجام شد
+                </div>
     <div class="mb-36" v-for="transaction in transactions">
-      <FinancialTransaction  @update-wallet="doClick()" :id="transaction.id"  :mablagh="transaction.amount" :tozihat="transaction.description" :tarikh="transaction.at_date" :dastebandiha="transaction.category.name" />
+      <FinancialTransaction @update-wallet="afterDelete()" :id="transaction.id" :mablagh="transaction.amount" :tozihat="transaction.description" :tarikh="transaction.at_date" :dastebandiha="transaction.category.name" />
     </div>
+  </div>
   </template>
   <script >
   import FinancialTransaction from '../components/FinancialTransaction.vue'
   export default {
     data(){
         return{
-           transactions: {}
+          transactions: {},
+          isSuccess:false,
         };
     },
    components:{
@@ -22,10 +28,12 @@
             this.transactions = responseMT.data
         });
      },
-     doClick() {
+     afterDelete(){
+      this.isSuccess=true
       this.getMT()
       this.$emit('updateWallet')
-    }
+     }
+    
    },
    created(){
         this.getMT()
