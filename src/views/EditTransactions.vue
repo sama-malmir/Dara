@@ -36,11 +36,14 @@
                     type="text" cols="23" rows="5"></textarea>
             </div>
             <div class="inline-flex justify-end">
-                <button class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold -mt-7">
+                <button @click="editData()" class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold -mt-7">
                     ویرایش
                 </button>
             </div>
         </div>
+    </div>
+    <div v-if="isSuccess" class="text-green-500 font-bold text-2xl mt-11 text-center">
+        ویرایش با موفقیت انجام شد
     </div>
 </template>
 <script>
@@ -51,8 +54,10 @@ export default {
             mablagh: null,
             tozihat: null,
             dastebandi: null,
-            transactionType: null
-
+            transactionType: null,
+            isSuccess: false,
+            transactionId: null
+           
         }
     },
     methods: {
@@ -83,6 +88,21 @@ export default {
             } else {
                 this.transactionType = 'depoist'
             }
+        },
+        editData() {
+            const requestOptions = {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ amount: this.mablagh, description: this.tozihat, category_id: this.dastebandi })
+            };
+            fetch('http://193.70.91.1:3000/api/v1/wallet_transaction/' + this.$route.params.transactionId, requestOptions)
+                .then(response => {
+                    if (response.status === 204) {
+                        this.isSuccess = true;
+                        this.$emit('updateWallet')
+                    }
+                   
+                })
         },
     },
     created() {
