@@ -8,6 +8,7 @@
         <main>
           <NavBar :name="name" :wallet="balance"/>
           <List />
+          
         </main>
       </div>
     </div>
@@ -18,6 +19,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import List from './components/List.vue';
 import NavBar from './components/NavBar.vue';
+import EditTransactions from './views/EditTransactions.vue';
 export default {
   data() {
     return {
@@ -28,7 +30,8 @@ export default {
   components: {
     List,
     NavBar,
-  },
+    EditTransactions
+},
   methods: {
     getDataUser() {
       fetch('http://193.70.91.1:3000/api/v1/wallet/2')

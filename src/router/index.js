@@ -22,6 +22,11 @@ const router = createRouter({
       path:'/financial-transactions',
       name:'FinancialTransactionsView',
       component: () => import ('../views/FinancialTransactions.vue')
+    },
+    {
+      path:'/wallet-transactions/edit/:transactionId',
+      name:'EditTransactionsView',
+      component: () => import ('../views/EditTransactions.vue')
     }
   ]
 })

@@ -22,9 +22,17 @@
                 <label>توضیحات</label>
                 <div class="stylelists w-40"> {{ tozihat }}</div>
             </div>
-            <div class="flex items-center mr-8">
-                <button class="h-8 border w-16 rounded-xl bg-secondary-color text-main-color font-bold mt-10"
-                    @click="deleteTransaction(id)">حذف</button>
+            <div class="flex flex-col justify-around">
+                <RouterLink :to= "{name: 'EditTransactionsView', params: {transactionId: id}}">
+                    <div class="flex  mr-8">
+                        <button class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold"
+                           >ویرایش</button>
+                    </div>
+                </RouterLink>
+                <div class="flex items-center mr-8">
+                    <button class="h-8 border w-16 rounded-xl bg-secondary-color text-main-color font-bold"
+                        @click="deleteTransaction(id)">حذف</button>
+                </div>
             </div>
             <div class="inline-flex items-start flex-col">
                 <div v-if="Errors" class="text-red-400 font-bold text-2xl  text-center">
@@ -38,7 +46,7 @@
 export default {
     data() {
         return {
-            
+
         }
     },
     props: {
@@ -65,9 +73,9 @@ export default {
                     }
                 })
         },
-       doClick(){
+        doClick() {
 
-       }
+        }
     },
 
 
