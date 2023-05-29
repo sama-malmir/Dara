@@ -21,10 +21,10 @@
             <div class="inline-flex items-center">
                 <label>مبلغ <span class="text-red-600 text-2xl">*</span></label>
                 <div class="flex flex-col">
-                    <input @change="isWrongAmount = false; isSuccess = false" type="number" dir="ltr" v-model="mablagh"
+                    <input type="number" dir="ltr" v-model="mablagh" @change="isWrongAmount = false"
                         :class="[isWrongAmount == true ? 'border-red-600 border-2' : 'border-gray-600']"
                         class="mr-14 border my-3 py-3 px-4 rounded-xl h-8 text-slate-950 w-56">
-                    <div class="ml-4" dir="ltr" v-if="mablagh > 0">{{ mablagh.toLocaleString() }}</div>
+                    <div class="ml-4" dir="ltr" v-if="mablagh > 0 " >{{ mablagh.toLocaleString() }}</div>
                 </div>
                 <p v-if="isWrongAmount">
                     <b class="text-red-600 text-lg mr-5">لطفا مبلغ را وارد کنید</b>
@@ -36,7 +36,8 @@
                     type="text" cols="23" rows="5"></textarea>
             </div>
             <div class="inline-flex justify-end">
-                <button @click="editData()" class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold -mt-7">
+                <button @click="editData()"
+                    class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold -mt-7">
                     ویرایش
                 </button>
             </div>
@@ -44,6 +45,9 @@
     </div>
     <div v-if="isSuccess" class="text-green-500 font-bold text-2xl mt-11 text-center">
         ویرایش با موفقیت انجام شد
+    </div>
+    <div v-if="isErrors" v-for="error in errors" class="text-secondary-color font-bold text-f20 mt-11 text-end ml-435">
+        {{ error }}
     </div>
 </template>
 <script>
@@ -56,8 +60,11 @@ export default {
             dastebandi: null,
             transactionType: null,
             isSuccess: false,
-            transactionId: null
-           
+            transactionId: null,
+            isWrongAmount: false,
+            isWrongCategory: false,
+            isErrors: false,
+            errors: [],
         }
     },
     methods: {
@@ -82,18 +89,35 @@ export default {
                 })
         },
         selectTransactionType() {
+
             if (this.mablagh <= 0) {
                 this.transactionType = 'withdraw'
                 this.mablagh = -this.mablagh
+                
             } else {
                 this.transactionType = 'depoist'
             }
         },
         editData() {
+            let amountBackend = this.mablagh
+            if (this.mablagh === null || this.mablagh <= 0) {
+                this.isWrongAmount = true
+            }
+            if (this.dastebandi === null) {
+                this.isWrongCategory = true
+            }
+            if (this.isWrongAmount === true || this.isWrongCategory === true) {
+                return
+            }
+            if (this.transactionType === 'withdraw' && this.mablagh != null) {
+                amountBackend = -this.mablagh
+                
+                
+            }
             const requestOptions = {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ amount: this.mablagh, description: this.tozihat, category_id: this.dastebandi })
+                body: JSON.stringify({ amount: amountBackend, description: this.tozihat, category_id: this.dastebandi })
             };
             fetch('http://193.70.91.1:3000/api/v1/wallet_transaction/' + this.$route.params.transactionId, requestOptions)
                 .then(response => {
@@ -101,7 +125,14 @@ export default {
                         this.isSuccess = true;
                         this.$emit('updateWallet')
                     }
-                   
+                    if (response.status === 422) {
+                        response.json()
+                            .then(khata => {
+                                this.isErrors = true
+                                this.errors = khata.errors
+                            })
+                    }
+
                 })
         },
     },
