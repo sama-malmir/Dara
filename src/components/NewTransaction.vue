@@ -78,6 +78,7 @@ export default {
                 )
         },
         newTransaction() {
+            let amountBackend = this.mablagh
             if (this.mablagh == null || this.mablagh <= 0) {
                 this.isWrongAmount = true
             }
@@ -88,12 +89,12 @@ export default {
                 return
             }
             if (this.transactionType === 'withdraw' && this.mablagh != null) {
-                this.mablagh = -this.mablagh
+                amountBackend = -this.mablagh
             }
             const requestOptions = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ amount: this.mablagh, description: this.tozihat, category_id: this.dastebandi })
+                body: JSON.stringify({ amount: amountBackend, description: this.tozihat, category_id: this.dastebandi })
             };
             fetch('http://193.70.91.1:3000/api/v1/wallet/2/wallet_transaction', requestOptions)
                 .then(response => {
