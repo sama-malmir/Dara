@@ -30,10 +30,14 @@ const router = createRouter({
     },
     {
       path:'/budgets',
-      name:'budgets',
-      component: () => import ('../views/budgets.vue')
+      name:'Budgets',
+      component: () => import ('../views/Budgets.vue')
     },
-    
+    {
+      path:'/new-budget',
+      name:'NewBudget',
+      component: () => import ('../views/NewBudget.vue')
+    },
   ]
 })
 
