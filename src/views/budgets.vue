@@ -18,7 +18,7 @@
             </div>
             <div class="inline-flex items-center flex-col">
                 <label class="ml-12">ماه</label>
-                <div class="stylelists w-36"> {{ data.month }} </div>
+                <div class="stylelists w-36"> {{ getMonth(data.month) }} </div>
             </div>
             <div class="inline-flex items-center flex-col">
                 <label class="ml-12">سال</label>
@@ -30,7 +30,6 @@
             </div>
         </div>
     </div>
-    
 </template>
 <script>
 export default {
@@ -52,7 +51,17 @@ export default {
                     this.datas = response.data
 
                 });
-        }
+        },
+        getMonth(x) {
+            const month = {
+                1: 'فروردین', 2: 'اردیبهشت', 3: 'خرداد',
+                4: 'تیر', 5: 'مرداد', 6: 'شهریور',
+                7: 'مهر', 8: 'آبان', 9: 'آذر',
+                10: 'دی', 11: 'بهمن', 12: 'اسفند'
+            };
+            let esme_mah = month[x]
+            return esme_mah
+        },
     },
     created() {
         this.getBudgets()
