@@ -30,7 +30,8 @@ export default {
   components: {
     List,
     NavBar,
-    EditTransactions
+    EditTransactions,
+    
 },
   methods: {
     getDataUser() {

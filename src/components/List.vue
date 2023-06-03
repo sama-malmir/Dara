@@ -11,9 +11,11 @@
                     تراکنش جدید
                 </div>
             </RouterLink>
-            <div class="listStyle">
-                لیست تراکنش‌ها 
-            </div>
+            <RouterLink to="/budgets" >
+                <div class="listStyle">
+                    بودجه بندی 
+                </div>
+            </RouterLink>
             <div class="listStyle">
                 لیست تراکنش ها 
             </div>
