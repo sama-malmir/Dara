@@ -14,7 +14,7 @@
         <div class="style w-2/3">
             <div class="inline-flex items-center flex-col">
                 <label class="ml-3">دسته‌بندی</label>
-                <div class="stylelists w-36"> {{ data.category_id }} </div>
+                <div class="stylelists w-36"> {{ getCategoryName(data.category_id) }} </div>
             </div>
             <div class="inline-flex items-center flex-col">
                 <label class="ml-12">ماه</label>
@@ -40,6 +40,7 @@ export default {
             month: null,
             year: null,
             amount: null,
+            categoris: []
         }
     },
     methods: {
@@ -62,9 +63,26 @@ export default {
             let esme_mah = month[x]
             return esme_mah
         },
+        getCategory() {
+            fetch('http://193.70.91.1:3000/api/v1/category')
+                .then(response => response.json())
+                .then(response => {
+                    this.categoris = response.data
+                })
+        },
+        getCategoryName(index) {
+            let category_name = null
+            this.categoris.forEach((category) => {
+                if (category.id == index) {
+                    category_name = category.name
+                }
+            })
+            return category_name
+        }
     },
     created() {
         this.getBudgets()
+        this.getCategory()
     }
 }
 </script>
