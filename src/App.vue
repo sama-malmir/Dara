@@ -8,7 +8,7 @@
         <main>
           <NavBar :name="name" :wallet="balance"/>
           <List />
-          
+
         </main>
       </div>
     </div>
@@ -31,8 +31,8 @@ export default {
     List,
     NavBar,
     EditTransactions,
-    
-},
+
+  },
   methods: {
     getDataUser() {
       fetch('http://193.70.91.1:3000/api/v1/wallet/2')
@@ -40,7 +40,7 @@ export default {
         .then(response => JSON.parse(response))
         .then(response => {
           this.name = response.data.name,
-            this.balance = response.data.balance
+          this.balance = response.data.balance
         });
     }
   },

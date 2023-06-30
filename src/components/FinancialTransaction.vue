@@ -25,8 +25,9 @@
             <div class="flex flex-col justify-around">
                 <RouterLink :to= "{name: 'EditTransactionsView', params: {transactionId: id}}">
                     <div class="flex  mr-8">
-                        <button class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold"
-                           >ویرایش</button>
+                        <button class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold">
+                            ویرایش
+                        </button>
                     </div>
                 </RouterLink>
                 <div class="flex items-center mr-8">

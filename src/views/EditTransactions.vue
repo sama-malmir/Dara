@@ -24,7 +24,7 @@
                     <input type="number" dir="ltr" v-model="mablagh" @change="isWrongAmount = false"
                         :class="[isWrongAmount == true ? 'border-red-600 border-2' : 'border-gray-600']"
                         class="mr-14 border my-3 py-3 px-4 rounded-xl h-8 text-slate-950 w-56">
-                    <div class="ml-4" dir="ltr" v-if="mablagh > 0 " >{{ mablagh.toLocaleString() }}</div>
+                    <div class="ml-4" dir="ltr" v-if="mablagh > 0">{{ mablagh.toLocaleString() }}</div>
                 </div>
                 <p v-if="isWrongAmount">
                     <b class="text-red-600 text-lg mr-5">لطفا مبلغ را وارد کنید</b>
@@ -85,15 +85,13 @@ export default {
                 .then(response => JSON.parse(response))
                 .then(response => {
                     this.categoris = response.data
-
                 })
         },
         selectTransactionType() {
-
             if (this.mablagh <= 0) {
                 this.transactionType = 'withdraw'
                 this.mablagh = -this.mablagh
-                
+
             } else {
                 this.transactionType = 'depoist'
             }
@@ -111,8 +109,6 @@ export default {
             }
             if (this.transactionType === 'withdraw' && this.mablagh != null) {
                 amountBackend = -this.mablagh
-                
-                
             }
             const requestOptions = {
                 method: "PUT",
