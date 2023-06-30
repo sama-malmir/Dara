@@ -3,9 +3,10 @@
         <div class="style w-2/3">
             <div class="inline-flex items-center flex-col">
                 <label class="-mr-28">دسته‌بندی</label>
-                <select  @change="isWrongCategory = false; isSuccess = false" v-model="category" name="category" class="mr-3 my-3  w-56 h-8 rounded-xl text-black">
+                <select @change="isWrongCategory = false; isSuccess = false" v-model="category" name="category"
+                    class="mr-3 my-3  w-56 h-8 rounded-xl text-black">
                     <option class="text-black" v-for="category in categoris" :value="category.id" :key="category.id"
-                    :class="[isWrongAmount == true ? 'border-red-600 border-2' : 'border-gray-600']">
+                        :class="[isWrongAmount == true ? 'border-red-600 border-2' : 'border-gray-600']">
                         {{ category.name }}</option>
                 </select>
                 <p v-if="isWrongCategory">
@@ -14,11 +15,11 @@
             </div>
             <div class="inline-flex items-center flex-col">
                 <label class="-mr-4">مبلغ</label>
-                <div >
+                <div>
                     <input @change="isWrongAmount = false; isSuccess = false" v-model="amount" type="number"
-                    :class="[isWrongAmount == true ? 'border-red-600 border-2' : 'border-gray-600']" class="stylelists w-36"
-                    dir="ltr">
-                <div class="ml-4" dir="ltr" v-if="amount > 0">{{ amount.toLocaleString() }}</div>
+                        :class="[isWrongAmount == true ? 'border-red-600 border-2' : 'border-gray-600']"
+                        class="stylelists w-36" dir="ltr">
+                    <div class="ml-4" dir="ltr" v-if="amount > 0">{{ amount.toLocaleString() }}</div>
                 </div>
             </div>
             <p class="mr-3 mt-8" v-if="isWrongAmount">
@@ -35,7 +36,7 @@
     </div>
     <div class="relative">
         <div class=" absolute left-36 bottom-415">
-            <h1 class="text-xl text-secondary-color"> این بودجه برای ماه خرداد سال ۱۴۰۲ می باشد </h1>
+            <h1 class="text-xl text-secondary-color"> این بودجه برای ماه تیر سال ۱۴۰۲ می باشد </h1>
         </div>
     </div>
     <div v-if="isSuccess" class="text-secondary-color font-bold text-2xl -mt-48 text-center">
@@ -82,7 +83,7 @@ export default {
             const requestOptions = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ category_id: this.category, amount: this.amount, year: 1402, month: 3 })
+                body: JSON.stringify({ category_id: this.category, amount: this.amount, year: 1402, month: 4 })
             };
             fetch('http://193.70.91.1:3000/api/v1/wallet/2/budget', requestOptions)
                 .then(response => {
