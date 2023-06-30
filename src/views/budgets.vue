@@ -28,6 +28,21 @@
                 <label class="ml-12">مبلغ</label>
                 <div class="stylelists w-36"> {{ data.amount.toLocaleString() }} </div>
             </div>
+            <div class="flex flex-col justify-around">
+                <div>
+                    <RouterLink :to="{ name: 'EditBudgetsView', params: { budgetId: data.id } }">
+                        <div class="flex  mr-8">
+                            <button class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold">
+                                ویرایش
+                            </button>
+                        </div>
+                    </RouterLink>
+                </div>
+                <div class="flex items-center mr-8">
+                    <button class="h-8 border w-16 rounded-xl bg-secondary-color text-main-color font-bold"
+                        @click="deleteBudget(data.id)">حذف</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -44,6 +59,21 @@ export default {
         }
     },
     methods: {
+        deleteBudget(budgetId) {
+            const requestOptions = {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+            };
+            fetch('http://193.70.91.1:3000/api/v1/budget/' + budgetId, requestOptions)
+                .then(response => {
+                    if (response.status === 204) {
+                        this.afterDelete()
+                    }
+                })
+        },
+        afterDelete() {
+            this.getBudgets()
+        },
         getBudgets() {
             fetch('http://193.70.91.1:3000/api/v1/wallet/2/budget')
                 .then(response => response.text())
