@@ -48,7 +48,11 @@ const router = createRouter({
       name:'Loan',
       component: () => import ('../views/Loan.vue')
     },
-    
+    {
+      path:'/new-loan',
+      name:'NewLoan',
+      component: () => import ('../views/NewLoan.vue')
+    },
   ]
 })
 
