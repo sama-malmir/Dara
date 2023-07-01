@@ -16,9 +16,11 @@
                     بودجه بندی 
                 </div>
             </RouterLink>
-            <div class="listStyle">
-                لیست تراکنش ها 
-            </div>
+            <RouterLink to="/loan">
+                <div class="listStyle">
+                    تسهیلات 
+                </div>
+            </RouterLink>
             <div class="listStyle">
                 لیست تراکنش ها 
             </div>
