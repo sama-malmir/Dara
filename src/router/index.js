@@ -53,6 +53,11 @@ const router = createRouter({
       name:'NewLoan',
       component: () => import ('../views/NewLoan.vue')
     },
+    {
+      path:'/loan-details',
+      name:'LoanDetails',
+      component: () => import ('../views/LoanDetails.vue')
+    },
   ]
 })
 

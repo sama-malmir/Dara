@@ -13,10 +13,12 @@
         </div>
         <div class="flex justify-center">
             <div class="style w-3/4">
+                <RouterLink to="/loan-details">
                     <div class="inline-flex items-start flex-col">
                         <label class="mb-3"> تسهیلات </label>
                         <input type="number" class="stylelists w-44">
                     </div>
+                </RouterLink>
                 <div class="inline-flex items-start flex-col">
                     <label class="mb-3"> تعداد قسط </label>
                     <input type="number" class="stylelists w-24">
@@ -55,4 +57,5 @@ export default {
 
 .stylelists {
     @apply h-8 flex items-center border rounded-xl text-main-color
-}</style>
+}
+</style>
