@@ -11,29 +11,29 @@
                 </RouterLink>
             </div>
         </div>
-        <div class="flex justify-center">
+        <div v-for="data in datas" class="flex justify-center mb-48">
             <div class="style w-3/4">
                 <RouterLink to="/loan-details">
                     <div class="inline-flex items-start flex-col">
                         <label class="mb-3"> تسهیلات </label>
-                        <input type="number" class="stylelists w-44">
+                        <div class="stylelists w-36">{{ data.title }}</div>
                     </div>
                 </RouterLink>
                 <div class="inline-flex items-start flex-col">
                     <label class="mb-3"> تعداد قسط </label>
-                    <input type="number" class="stylelists w-24">
+                    <div class="stylelists w-36">{{ data.number_of_installment }}</div>
                 </div>
                 <div class="inline-flex items-start flex-col">
                     <label class="mb-3"> مبلغ کل </label>
-                    <input type="number" class="stylelists w-36">
+                    <div class="stylelists w-36">{{ data.amount }}</div>
                 </div>
                 <div class="inline-flex items-start flex-col">
-                    <label class="mb-3"> مبلغ باقی مانده </label>
-                    <input type="number" class="stylelists w-36">
+                    <label class="mb-3"> اقساط پرداخت شده </label>
+                    <div class="stylelists w-36">{{ data.number_of_paid }}</div>
                 </div>
                 <div class="inline-flex items-start flex-col">
                     <label class="mb-3"> توضیحات </label>
-                    <input type="number" class="stylelists w-44">
+                    <div class="stylelists w-44">{{ description }}</div>
                 </div>
                 <div class="inline-flex mt-auto mb-4">
                     <button class="ml-4 h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold "> حذف
@@ -47,7 +47,29 @@
 </template>
 <script>
 export default {
-
+    data() {
+        return {
+            datas: [],
+            title: null,
+            number_of_installment: null,
+            amount: null,
+            number_of_paid: null,
+        }
+    },
+    methods:{
+        getLoan(){
+            fetch('http://193.70.91.1:3000/api/v1/wallet/2/loan')
+            .then(response => response.text())
+            .then(response => JSON.parse(response))
+            .then(response => {
+                this.datas = response.data
+                console.log('wwwwwww')
+            })
+        }
+    },
+    created(){
+        this.getLoan()
+    },
 }
 </script>
 <style scoped>
@@ -56,6 +78,6 @@ export default {
 }
 
 .stylelists {
-    @apply h-8 flex items-center border rounded-xl text-main-color
+    @apply h-8 flex items-center border rounded-xl bg-white text-main-color pr-3
 }
 </style>
