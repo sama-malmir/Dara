@@ -13,7 +13,7 @@
         </div>
         <div v-for="data in datas" class="flex justify-center mb-48">
             <div class="style w-3/4">
-                <RouterLink to="/loan-details">
+                <RouterLink :to= "{name:'LoanDetails', params: {loanId: data.id}}">
                     <div class="inline-flex items-start flex-col">
                         <label class="mb-3"> تسهیلات </label>
                         <div class="stylelists w-36">{{ data.title }}</div>
@@ -54,6 +54,7 @@ export default {
             number_of_installment: null,
             amount: null,
             number_of_paid: null,
+            loanId: null
         }
     },
     methods:{
@@ -63,7 +64,6 @@ export default {
             .then(response => JSON.parse(response))
             .then(response => {
                 this.datas = response.data
-                console.log('wwwwwww')
             })
         }
     },
