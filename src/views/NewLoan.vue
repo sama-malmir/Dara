@@ -4,7 +4,12 @@
             <div class="style w-2/3">
                 <div class="inline-flex items-start flex-col">
                     <label class="mb-3"> تسهیلات </label>
-                    <input v-model="title" type="text" class="stylelists w-44">
+                    <input @change="isWrongTitle = false; isSuccess = false" v-model="title" type="text"
+                        class="stylelists w-44"
+                        :class="[isWrongTitle == true ? 'border-red-600 border-2' : 'border-gray-600']">
+                    <p v-if="isWrongTitle" class="mt-3 text-red-600 text-lg">
+                            لطفا تسهیلات را وارد کنید
+                    </p>
                 </div>
                 <div class="inline-flex items-start flex-col">
                     <div class="inline-flex">
@@ -12,15 +17,23 @@
                             alt="add">
                         <label class="mb-3"> تعداد قسط </label>
                     </div>
-                    <div v-for="loan in loans" class="inline-flex mb-2">
-                        <input v-model="installments[loan - 1].number_of_installment" type="number"
-                            class="stylelists w-9 ml-2">
-                        <input v-model="installments[loan - 1].amount" type="number" class="stylelists w-36">
+                    <div v-for="ghest in installments" class="inline-flex mb-2" @change="isWrongInstallment = false; isSuccess = false">
+                        <input v-model="ghest.number_of_installment" type="number" class="stylelists w-9 ml-2"
+                            :class="[isWrongInstallment == true ? 'border-red-600 border-2' : 'border-gray-600']">
+                        <input v-model="ghest.amount" type="number" class="stylelists w-36"
+                            :class="[isWrongInstallment == true ? 'border-red-600 border-2' : 'border-gray-600']">
                     </div>
+                    <p v-if="isWrongInstallment" class="mt-3 text-red-600 text-lg">
+                            لطفا تعداد اقساط را وارد کنید
+                    </p>
                 </div>
                 <div class="inline-flex items-start flex-col">
                     <label class="mb-3"> تاریخ اولین قسط </label>
-                    <input v-model="date" type="date" class="stylelists w-36 pl-3">
+                    <input @change="isWrongDate = false; isSuccess = false" v-model="date" type="date"
+                        class="stylelists w-36 pl-3">
+                    <p v-if="isWrongDate" class="mt-3 text-red-600 text-lg">
+                            لطفا تاریخ اولین قسط را وارد کنید
+                    </p>
                 </div>
                 <div class="flex mt-auto mb-4">
                     <button @click="newLoan()"
@@ -33,25 +46,49 @@
         <div v-if="isSuccess" class="text-secondary-color font-bold text-2xl -mt-32 mr-36 text-center">
             عملیات با موفقیت انجام شد
         </div>
+        <div v-if="isErrors" v-for="error in errors" class="text-secondary-color font-bold text-f20 mt-11 text-end ml-435">
+            {{ error }}
+        </div>
     </div>
 </template>
 <script>
 export default {
     data() {
         return {
-            loans: 0,
             title: null,
             date: null,
             isSuccess: false,
-            installments: []
+            installments: [{ number_of_installment: null, amount: null }],
+            isErrors: false,
+            errors: [],
+            isWrongTitle: false,
+            isWrongInstallment: false,
+            isWrongDate: false,
         }
     },
     methods: {
         increseLoan() {
             this.installments.push({ number_of_installment: null, amount: null })
-            this.loans++
         },
         newLoan() {
+            if (this.title === null) {
+                this.isWrongTitle = true
+            }
+            if (this.date == null) {
+                this.isWrongDate = true
+            }
+
+            this.installments.forEach(ghest => {
+                if (ghest.number_of_installment == null || ghest.number_of_installment <= 0) {
+                    this.isWrongInstallment = true
+                }
+                if (ghest.amount == null || ghest.amount <= 0) {
+                    this.isWrongInstallment = true
+                }
+            })
+            if (this.isWrongTitle === true || this.isWrongInstallment === true || this.isWrongDate === true) {
+                return
+            }
             const requestOptions = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -68,6 +105,13 @@ export default {
                     if (response.status === 204) {
                         this.isSuccess = true;
                         this.clearPage()
+                    }
+                    if (response.status === 422) {
+                        response.json()
+                            .then(khata => {
+                                this.isErrors = true
+                                this.errors = khata.errors
+                            })
                     }
                 })
         },
