@@ -17,16 +17,20 @@
                 <div class="stylelists w-36"> {{ getCategoryName(data.category_id) }} </div>
             </div>
             <div class="inline-flex items-center flex-col">
-                <label class="ml-12">ماه</label>
-                <div class="stylelists w-36"> {{ getMonth(data.month) }} </div>
+                <label class="-ml-6">ماه</label>
+                <div class="stylelists w-16"> {{ getMonth(data.month) }} </div>
             </div>
             <div class="inline-flex items-center flex-col">
-                <label class="ml-12">سال</label>
-                <div class="stylelists w-36"> {{ data.year }} </div>
+                <label class="-ml-6">سال</label>
+                <div class="stylelists w-16"> {{ data.year }} </div>
             </div>
             <div class="inline-flex items-center flex-col">
-                <label class="ml-12">مبلغ</label>
+                <label class="ml-8">مبلغ</label>
                 <div class="stylelists w-36"> {{ data.amount.toLocaleString() }} </div>
+            </div>
+            <div class="inline-flex items-center flex-col">
+                <label>مبلغ خرج شده</label>
+                <div class="stylelists w-36"> {{ data.spend }} </div>
             </div>
             <div class="flex flex-col justify-around">
                 <div>
@@ -55,6 +59,7 @@ export default {
             month: null,
             year: null,
             amount: null,
+            spend: null,
             categoris: []
         }
     },
