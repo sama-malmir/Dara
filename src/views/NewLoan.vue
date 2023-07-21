@@ -8,7 +8,7 @@
                         class="stylelists w-44"
                         :class="[isWrongTitle == true ? 'border-red-600 border-2' : 'border-gray-600']">
                     <p v-if="isWrongTitle" class="mt-3 text-red-600 text-lg">
-                            لطفا تسهیلات را وارد کنید
+                        لطفا تسهیلات را وارد کنید
                     </p>
                 </div>
                 <div class="inline-flex items-start flex-col">
@@ -17,22 +17,22 @@
                             alt="add">
                         <label class="mb-3"> تعداد قسط </label>
                     </div>
-                    <div v-for="ghest in installments" class="inline-flex mb-2" @change="isWrongInstallment = false; isSuccess = false">
+                    <div v-for="ghest in installments" class="inline-flex mb-2"
+                        @change="isWrongInstallment = false; isSuccess = false">
                         <input v-model="ghest.number_of_installment" type="number" class="stylelists w-9 ml-2"
                             :class="[isWrongInstallment == true ? 'border-red-600 border-2' : 'border-gray-600']">
                         <input v-model="ghest.amount" type="number" class="stylelists w-36"
                             :class="[isWrongInstallment == true ? 'border-red-600 border-2' : 'border-gray-600']">
                     </div>
                     <p v-if="isWrongInstallment" class="mt-3 text-red-600 text-lg">
-                            لطفا تعداد اقساط را وارد کنید
+                        لطفا تعداد اقساط را وارد کنید
                     </p>
                 </div>
                 <div class="inline-flex items-start flex-col">
                     <label class="mb-3"> تاریخ اولین قسط </label>
-                    <input @change="isWrongDate = false; isSuccess = false" v-model="date" type="date"
-                        class="stylelists w-36 pl-3">
+                    <date-picker @change="isWrongDate = false; isSuccess = false" class="text-black rounded-xl" v-model="date"></date-picker>
                     <p v-if="isWrongDate" class="mt-3 text-red-600 text-lg">
-                            لطفا تاریخ اولین قسط را وارد کنید
+                        لطفا تاریخ اولین قسط را وارد کنید
                     </p>
                 </div>
                 <div class="flex mt-auto mb-4">
@@ -52,11 +52,12 @@
     </div>
 </template>
 <script>
+import Vue3PersianDatetimePicker from 'vue3-persian-datetime-picker'
 export default {
     data() {
         return {
             title: null,
-            date: null,
+            date: '',
             isSuccess: false,
             installments: [{ number_of_installment: null, amount: null }],
             isErrors: false,
@@ -66,6 +67,9 @@ export default {
             isWrongDate: false,
         }
     },
+    components: {
+        DatePicker: Vue3PersianDatetimePicker
+    },
     methods: {
         increseLoan() {
             this.installments.push({ number_of_installment: null, amount: null })
@@ -74,7 +78,7 @@ export default {
             if (this.title === null) {
                 this.isWrongTitle = true
             }
-            if (this.date == null) {
+            if (this.date == '') {
                 this.isWrongDate = true
             }
 
@@ -119,7 +123,7 @@ export default {
             this.loans = 0
             this.installments = []
             this.title = null
-            this.date = null
+            this.date = ''
         },
     },
 }
