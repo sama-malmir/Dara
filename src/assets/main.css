@@ -3,3 +3,21 @@
 @tailwind utilities;
 
 @import './base.css';
+@layer base{
+    @font-face {
+        font-family: 'vazir';
+        src: url(../assets/fonts/Vazirmatn-Light.ttf)format('woff2');
+    }
+}
+@layer base{
+    @font-face{
+        font-family: 'vazirBold';
+        src: url(../assets/fonts/Vazirmatn-Bold.ttf)format('woff');
+    }
+}
+@layer base{
+    @font-face{
+        font-family: 'vazirBlack';
+        src: url(../assets/fonts/Vazirmatn-Black.ttf)format('truetype');
+    }
+}

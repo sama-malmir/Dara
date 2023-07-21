@@ -24,6 +24,11 @@ module.exports = {
       fontSize: {
         f20: ['20px', '10px'],
       },
+      fontFamily: {
+        vazir: ['vazir','sans-serif'],
+        vazirBlack: ['vazirBlack','sans-serif'],
+        vazirBold: ['vazirBold','sans-serif'],
+      },
     },
   },
   plugins: [],
