@@ -13,20 +13,20 @@
             <div class="style w-3/4">
                 <div class="inline-flex items-start flex-col">
                     <label class="mb-3"> مبلغ قسط </label>
-                    <div class="stylelists w-36"> {{ data.amount }} </div>
+                    <div class="stylelists w-36 bg-white"> {{ data.amount }} </div>
                 </div>
                 <div class="inline-flex items-start flex-col">
                     <label class="mb-3"> وضعیت </label>
-                    <div v-if="data.status == 'paid'" class="stylelists w-36 ">  
-                    <b class="text-green-700"> پرداخت شده </b>
+                    <div v-if="data.status == 'paid'" class="stylelists w-36 bg-green-400">
+                        <b> پرداخت شده </b>
                     </div>
-                    <div v-if="data.status == 'unpaid'" class="stylelists w-36"> 
-                        <b class="text-red-700"> پرداخت نشده </b>
+                    <div v-if="data.status == 'unpaid'" class="stylelists w-36 bg-red-400">
+                        <b> پرداخت نشده </b>
                     </div>
                 </div>
                 <div class="inline-flex items-start flex-col">
                     <label class="mb-3"> تاریخ سررسید </label>
-                    <div class="stylelists w-36"> {{ data.due_date }} </div>
+                    <div class="stylelists w-36 bg-white"> {{ data.due_date }} </div>
                 </div>
                 <button @click="payment(data.id)"
                     class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold mt-auto mb-6">
@@ -71,9 +71,9 @@ export default {
                     }
                 })
         },
-        afterPayment(){
+        afterPayment() {
             this.getData()
-            
+
         },
     },
     created() {
@@ -88,6 +88,6 @@ export default {
 }
 
 .stylelists {
-    @apply h-8 flex items-center border rounded-xl text-main-color pr-3 bg-white
+    @apply h-8 flex items-center border rounded-xl text-main-color pr-3
 }
 </style>
