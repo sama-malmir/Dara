@@ -4,7 +4,7 @@
             <RouterLink to="/new-budget">
                 <div class="flex mr-8">
                     <button class="h-9 border w-32 rounded-xl bg-secondary-color text-main-color font-bold">
-                        بودجه بندی جدید
+                        بودجه بندی جدید 
                     </button>
                 </div>
             </RouterLink>
