@@ -30,7 +30,7 @@
                 </div>
                 <div class="inline-flex items-start flex-col">
                     <label class="mb-3"> تاریخ اولین قسط </label>
-                    <date-picker @change="isWrongDate = false; isSuccess = false" class="text-black rounded-xl" v-model="date"></date-picker>
+                    <date-picker @change="isWrongDate = false; isSuccess = false" format="YYYY-MM-DD" display-format="jYYYY-jMM-jDD" class="text-black rounded-xl" v-model="date"></date-picker>
                     <p v-if="isWrongDate" class="mt-3 text-red-600 text-lg">
                         لطفا تاریخ اولین قسط را وارد کنید
                     </p>
