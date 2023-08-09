@@ -13,7 +13,7 @@
         </div>
         <div v-for="data in datas" class="flex justify-center mb-48">
             <div class="style w-3/4">
-                <RouterLink :to= "{name:'LoanDetails', params: {loanId: data.id}}">
+                <RouterLink :to="{ name: 'LoanDetails', params: { loanId: data.id } }">
                     <div class="inline-flex items-start flex-col">
                         <label class="mb-3"> تسهیلات </label>
                         <div class="stylelists w-36">{{ data.title }}</div>
@@ -38,8 +38,10 @@
                 <div class="inline-flex mt-auto mb-4">
                     <button class="ml-4 h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold "> حذف
                     </button>
-                    <button class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold "> ویرایش
-                    </button>
+                    <RouterLink :to="{ name: 'EditLoan', params: { loanId: data.id } }">
+                        <button class="h-9 border w-16 rounded-xl bg-secondary-color text-main-color font-bold "> ویرایش
+                        </button>
+                    </RouterLink>
                 </div>
             </div>
         </div>
@@ -57,17 +59,17 @@ export default {
             loanId: null
         }
     },
-    methods:{
-        getLoan(){
+    methods: {
+        getLoan() {
             fetch('http://193.70.91.1:3000/api/v1/wallet/2/loan')
-            .then(response => response.text())
-            .then(response => JSON.parse(response))
-            .then(response => {
-                this.datas = response.data
-            })
+                .then(response => response.text())
+                .then(response => JSON.parse(response))
+                .then(response => {
+                    this.datas = response.data
+                })
         }
     },
-    created(){
+    created() {
         this.getLoan()
     },
 }
