@@ -19,7 +19,8 @@
                     <input @change="isWrongAmount = false; isSuccess = false" v-model="amount" type="number"
                         :class="[isWrongAmount == true ? 'border-red-600 border-2' : 'border-gray-600']"
                         class="stylelists w-36" dir="ltr">
-                    <div class="ml-4" dir="ltr" v-if="amount > 0">{{ amount.toLocaleString() }}</div>
+                    <div class="ml-4" dir="ltr"> {{ namayesheMablagh }}</div>
+
                 </div>
             </div>
             <p class="mr-3 mt-8" v-if="isWrongAmount">
@@ -36,7 +37,7 @@
     </div>
     <div class="relative">
         <div class=" absolute left-36 bottom-415">
-            <h1 class="text-xl text-secondary-color"> این بودجه برای ماه تیر سال ۱۴۰۲ می باشد </h1>
+            <h1 class="text-xl text-secondary-color"> این بودجه برای ماه مرداد سال ۱۴۰۲ می باشد </h1>
         </div>
     </div>
     <div v-if="isSuccess" class="text-secondary-color font-bold text-2xl -mt-48 text-center">
@@ -58,11 +59,12 @@ export default {
             errors: [],
             isWrongAmount: false,
             isWrongCategory: false,
+            mablaghBeFarsi: null
         }
     },
     methods: {
         getCategory() {
-            fetch('http://193.70.91.1:3000/api/v1/category')
+            fetch('http://193.70.91.1:3221/api/v1/category')
                 .then(response => response.json())
                 .then(response => {
                     this.categoris = response.data
@@ -83,9 +85,9 @@ export default {
             const requestOptions = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ category_id: this.category, amount: this.amount, year: 1402, month: 4 })
+                body: JSON.stringify({ category_id: this.category, amount: this.amount, year: 1402, month: 5 })
             };
-            fetch('http://193.70.91.1:3000/api/v1/wallet/2/budget', requestOptions)
+            fetch('http://193.70.91.1:3221/api/v1/wallet/2/budget', requestOptions)
                 .then(response => {
                     if (response.status === 204) {
                         this.isSuccess = true

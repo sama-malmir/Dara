@@ -65,7 +65,7 @@ export default {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
             };
-            fetch('http://193.70.91.1:3000/api/v1/wallet_transaction/' + transactionId, requestOptions)
+            fetch('http://193.70.91.1:3221/api/v1/wallet_transaction/' + transactionId, requestOptions)
                 .then(response => {
                     if (response.status === 204) {
                         this.$emit('updateWallet')

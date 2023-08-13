@@ -65,12 +65,12 @@ export default {
             transactionType: 'withdraw',
             isWrongAmount: false,
             isWrongCategory: false
-
+            
         }
     },
     methods: {
         getCategory() {
-            fetch('http://193.70.91.1:3000/api/v1/category')
+            fetch('http://193.70.91.1:3221/api/v1/category')
                 .then(response => response.json())
                 .then(response => {
                     this.categoris = response.data
@@ -96,7 +96,7 @@ export default {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ amount: amountBackend, description: this.tozihat, category_id: this.dastebandi })
             };
-            fetch('http://193.70.91.1:3000/api/v1/wallet/2/wallet_transaction', requestOptions)
+            fetch('http://193.70.91.1:3221/api/v1/wallet/2/wallet_transaction', requestOptions)
                 .then(response => {
                     if (response.status === 204) {
                         this.isSuccess = true;

@@ -18,7 +18,7 @@
 <script >
 import { RouterLink, RouterView } from 'vue-router'
 import List from './components/List.vue';
-import NavBar from './components/NavBar.vue';
+import NavBar from './components/navbar.vue';
 import EditTransactions from './views/EditTransactions.vue';
 export default {
   data() {
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     getDataUser() {
-      fetch('http://193.70.91.1:3000/api/v1/wallet/2')
+      fetch('http://193.70.91.1:3221/api/v1/wallet/2')
         .then(response => response.text())
         .then(response => JSON.parse(response))
         .then(response => {

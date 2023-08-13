@@ -21,11 +21,5 @@ export default{
    name:String,
    wallet:String
 },
-methods:{
-    formatNumber(){
-        
-    
-    }
-}
 }
 </script>
