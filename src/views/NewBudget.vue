@@ -37,7 +37,7 @@
     </div>
     <div class="relative">
         <div class=" absolute left-36 bottom-415">
-            <h1 class="text-xl text-secondary-color"> این بودجه برای ماه مرداد سال ۱۴۰۲ می باشد </h1>
+            <h1 class="text-xl text-secondary-color"> این بودجه برای ماه مهر سال ۱۴۰۲ می باشد </h1>
         </div>
     </div>
     <div v-if="isSuccess" class="text-secondary-color font-bold text-2xl -mt-48 text-center">
@@ -85,7 +85,7 @@ export default {
             const requestOptions = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ category_id: this.category, amount: this.amount, year: 1402, month: 5 })
+                body: JSON.stringify({ category_id: this.category, amount: this.amount, year: 1402, month: 7 })
             };
             fetch('http://193.70.91.1:3221/api/v1/wallet/2/budget', requestOptions)
                 .then(response => {
