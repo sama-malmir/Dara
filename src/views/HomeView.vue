@@ -2,7 +2,7 @@
   <div class="flex justify-center">
     <div class="relative">
         <div class="flex flex-col justify-around absolute  bottom-415 " style="width: 500px; font-size: 15px;">
-          <div>مبلغ خرج شده تا به الان:‌ {{ total_expenses }}</div>
+          <div>مبلغ خرج شده  تا به الان:‌ {{ total_expenses }}</div>
           <div>بودجه این ماه: {{ budget_in_human }}</div>
           <div>مبلغ خرج‌شده از بودجه : {{ spend_budget_based_budget_in_human }}</div>
   </div>
